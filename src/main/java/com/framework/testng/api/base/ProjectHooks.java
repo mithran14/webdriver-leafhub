@@ -1,49 +1,55 @@
-package com.framework.testng.api.base;
+	package com.framework.testng.api.base;
 
-import java.io.IOException;
+	import java.io.IOException;
 
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.DataProvider;
+	import org.testng.annotations.AfterMethod;
+	import org.testng.annotations.BeforeMethod;
+	import org.testng.annotations.DataProvider;
 
-import com.framework.config.ConfigurationManager;
-import com.framework.selenium.api.base.SeleniumBase;
-import com.framework.utils.ReadExcel;
+	import com.framework.config.ConfigurationManager;
+	import com.framework.selenium.api.base.SeleniumBase;
+	import com.framework.utils.ReadExcel;
 
-public class ProjectHooks extends SeleniumBase {
+	public class ProjectHooks extends SeleniumBase {
 
-	@DataProvider(name = "fetchData", indices = 0)
-	public Object[][] fetchData() throws IOException {
-		return ReadExcel.readExcelData(excelFileName);
-	}
-	
-	@BeforeMethod
-	public void preCondition() {
-		//String appUrl  = System.getProperty("server.ip");
-		String appUrl  =system.getenv('DEV_SERVER_IP');
-		
-		if(appUrl == null) {
-			appUrl = ConfigurationManager.configuration().baseUrl();
-		} else {
-			appUrl = "http://"+appUrl+"/leaf";
+		@DataProvider(name = "fetchData", indices = 0)
+		public Object[][] fetchData() throws IOException {
+			return ReadExcel.readExcelData(excelFileName);
 		}
-		System.out.println("Application URL: " +appUrl);
-		
-		startApp("chrome", true, appUrl);
-		setNode();
-	}
-	
-	@AfterMethod
-	public void postCondition() {
-		close();
+
+		@BeforeMethod
+		public void preCondition() {
+			//String appUrl  = System.getProperty("server.ip");
+			String appUrl;
+			if (params.DEV_SERVER_IP != null && !params.DEV_SERVER_IP.isEmpty()) {
+	    		appUrl = "http://" + params.DEV_SERVER_IP + "/leaf";
+			} else {
+	    		appUrl = ConfigurationManager.configuration().baseUrl();
+			}
+			//println("Application URL: " + appUrl);
+
+			//if(appUrl == null) {
+				//appUrl = ConfigurationManager.configuration().baseUrl();
+			//} else {
+				//appUrl = "http://"+appUrl+"/leaf";
+			//}
+			System.out.println("Application URL: " +appUrl);
+
+			startApp("chrome", true, appUrl);
+			setNode();
+		}
+
+		@AfterMethod
+		public void postCondition() {
+			close();
+
+		}
+
+
+
+
+
+
+
 
 	}
-
-	
-
-	
-	  
-
-	
-	
-}
