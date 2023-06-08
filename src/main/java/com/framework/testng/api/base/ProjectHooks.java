@@ -19,20 +19,13 @@
 
 		@BeforeMethod
 		public void preCondition() {
-			//String appUrl  = System.getProperty("server.ip");
-			String appUrl;
-			if (params.DEV_SERVER_IP != null && !params.DEV_SERVER_IP.isEmpty()) {
-	    		appUrl = "http://" + params.DEV_SERVER_IP + "/leaf";
+			String appUrl  = System.getProperty("server.ip");
+		
+			if(appUrl == null) {
+				appUrl = ConfigurationManager.configuration().baseUrl();
 			} else {
-	    		appUrl = ConfigurationManager.configuration().baseUrl();
-			}
-			//println("Application URL: " + appUrl);
-
-			//if(appUrl == null) {
-				//appUrl = ConfigurationManager.configuration().baseUrl();
-			//} else {
 				//appUrl = "http://"+appUrl+"/leaf";
-			//}
+			}
 			System.out.println("Application URL: " +appUrl);
 
 			startApp("chrome", true, appUrl);
