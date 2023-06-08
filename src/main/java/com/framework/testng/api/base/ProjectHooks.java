@@ -19,8 +19,8 @@
 
 		@BeforeMethod
 		public void preCondition() {
-			String appUrl = System.getenv("server_ip");
-			//String appUrl  = System.getProperty("server.ip");
+			//String appUrl = System.getenv("server_ip");
+			String appUrl  = System.getProperty("server.ip");
 
 			if(appUrl == null) {
 				appUrl = ConfigurationManager.configuration().baseUrl();
