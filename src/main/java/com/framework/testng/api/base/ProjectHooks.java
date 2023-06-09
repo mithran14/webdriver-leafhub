@@ -19,12 +19,14 @@
 
 		@BeforeMethod
 		public void preCondition() {
-			//String appUrl = System.getenv("server_ip");
 			String appUrl  = System.getProperty("server.ip");
-
-			if(appUrl == null) {
+			
+			if(appUrl == null) 
+			{
 				appUrl = ConfigurationManager.configuration().baseUrl();
-			} else {
+			} 
+			else 
+			{
 				appUrl = "http://"+appUrl+"/leaf";
 			}
 			System.out.println("Application URL: " +appUrl);
