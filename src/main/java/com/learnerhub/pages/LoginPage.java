@@ -31,5 +31,11 @@ public class LoginPage extends ProjectHooks{
 		reportStep("Login button clicked successfully", "pass");
 		return new DashboardPage();
 	}
+	
+	public WelcomePage clickLogintoWelcomePage() {
+		click(locateElement(Locators.ID, "loginSubmit"));
+		reportStep("Login button clicked successfully", "pass");
+		return new WelcomePage();
+	}
 
 }

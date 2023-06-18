@@ -5,8 +5,9 @@
 	import org.testng.annotations.AfterMethod;
 	import org.testng.annotations.BeforeMethod;
 	import org.testng.annotations.DataProvider;
+import org.testng.annotations.Parameters;
 
-	import com.framework.config.ConfigurationManager;
+import com.framework.config.ConfigurationManager;
 	import com.framework.selenium.api.base.SeleniumBase;
 	import com.framework.utils.ReadExcel;
 
@@ -17,8 +18,9 @@
 			return ReadExcel.readExcelData(excelFileName);
 		}
 
+		@Parameters("browser")
 		@BeforeMethod
-		public void preCondition() {
+		public void preCondition(String browser) {
 			String appUrl  = System.getProperty("server.ip");
 			
 			if(appUrl == null) 
@@ -31,7 +33,7 @@
 			}
 			System.out.println("Application URL: " +appUrl);
 
-			startApp("chrome", true, appUrl);
+			startApp(browser, true, appUrl);
 			setNode();
 		}
 

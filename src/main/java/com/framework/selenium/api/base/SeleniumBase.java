@@ -6,6 +6,7 @@ import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
@@ -50,33 +51,41 @@ public class SeleniumBase extends ExtentReporter implements Browser, Element  {
 		return val;
 	}
 
-	protected void moveToElement(WebElement ele) {
-		act = new Actions(getDriver());
-		act.moveToElement(ele).perform();
+	protected void moveToElement(WebElement ele){
+//		try {
+//			act = new Actions(getDriver());
+//		} catch (MalformedURLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (InterruptedException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		act.moveToElement(ele).perform();
 	}
 	
-	protected void dragAndDrop(WebElement eleSoutce, WebElement eleTarget) {
+	protected void dragAndDrop(WebElement eleSoutce, WebElement eleTarget) throws MalformedURLException, InterruptedException {
 		act = new Actions(getDriver());
 		act.dragAndDrop(eleSoutce, eleTarget).perform();
 	}
 
-	protected void contextClick(WebElement ele) {
+	protected void contextClick(WebElement ele) throws MalformedURLException, InterruptedException {
 		act = new Actions(getDriver());
 		act.contextClick(getWait().until(ExpectedConditions.elementToBeClickable(ele))).perform();
 	}
 
-	protected void hoverAndClick(WebElement ele) {
+	protected void hoverAndClick(WebElement ele) throws MalformedURLException, InterruptedException {
 		act = new Actions(getDriver());
 		act.moveToElement(getWait().until(ExpectedConditions.elementToBeClickable(ele))).pause(5000).click().perform();
 	}
 
-	protected void doubleTap(WebElement ele) {
+	protected void doubleTap(WebElement ele) throws MalformedURLException, InterruptedException {
 		act = new Actions(getDriver());
 		act.click(getWait().until(ExpectedConditions.elementToBeClickable(ele))).click().perform();
 		reportStep("Element moved", "info");
 	}
 
-	protected void doubleClick(WebElement ele) {
+	protected void doubleClick(WebElement ele) throws MalformedURLException, InterruptedException {
 		act = new Actions(getDriver());
 		act.doubleClick(getWait().until(ExpectedConditions.elementToBeClickable(ele))).perform();
 		reportStep("Element double clicked", "info");
@@ -737,22 +746,47 @@ public class SeleniumBase extends ExtentReporter implements Browser, Element  {
 	}
 
 	@Override
-	public boolean switchToWindow(String title) {
-		try {
-			Set<String> allWindows = getDriver().getWindowHandles();
-			for (String eachWindow : allWindows) {
-				getDriver().switchTo().window(eachWindow);
-				if (getDriver().getTitle().equals(title)) {
-					break;
-				}
-			}
-			reportStep("The Window With Title: " + title + "is switched ", "info");
-			return true;
-		} catch (NoSuchWindowException e) {
-			reportStep("The Window With Title: " + title + " not found", "fail", false);
-		}
+public boolean switchToWindow(String title) {
+//		try {
+//			Set<String> allWindows;
+//			try {
+//				allWindows = getDriver().getWindowHandles();
+//			} catch (MalformedURLException e1) {
+//				// TODO Auto-generated catch block
+//				e1.printStackTrace();
+//			} catch (InterruptedException e1) {
+//				// TODO Auto-generated catch block
+//				e1.printStackTrace();
+//			}
+//			for (String eachWindow : allWindows) {
+//				try {
+//					getDriver().switchTo().window(eachWindow);
+//				} catch (MalformedURLException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				} catch (InterruptedException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+//				try {
+//					if (getDriver().getTitle().equals(title)) {
+//						break;
+//					}
+//				} catch (MalformedURLException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				} catch (InterruptedException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+//			}
+//			reportStep("The Window With Title: " + title + "is switched ", "info");
+//			return true;
+//		} catch (NoSuchWindowException e) {
+//			reportStep("The Window With Title: " + title + " not found", "fail", false);
+//		}
 		return false;
-	}
+}
 
 	@Override
 	public void switchToFrame(int index) {
