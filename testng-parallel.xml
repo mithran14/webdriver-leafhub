@@ -3,7 +3,7 @@
 <suite  name="Suite" parallel="tests" thread-count="3" >
 
   <test thread-count="2" parallel="classes" name="Test">
-   <parameter name="browser" value="chrome" />
+   <parameter name="browser" value="firefox" />
     <classes>
      <class name="com.learnerhub.testcases.TC001_JustLogin"/>
     </classes>
