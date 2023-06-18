@@ -10,14 +10,14 @@
   </test>
   
   <test name="Test 2">
-    <parameter name="browser" value="firefox" />
+    <parameter name="browser" value="msedge" />
     <classes>
             <class name="com.learnerhub.testcases.TC002_Register"/>
     </classes>
   </test>
   
   <test name="Test 3">
-    <parameter name="browser" value="msedge" />
+    <parameter name="browser" value="chrome" />
     <classes>
           <class name="com.learnerhub.testcases.TC003_WelcomeMessage"/>
     </classes>
